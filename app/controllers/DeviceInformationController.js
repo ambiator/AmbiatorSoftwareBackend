@@ -151,7 +151,7 @@ exports.DeviceParameterInfo = async (req, res) => {
 
 
             // Avoided Energy Today
-            avoEnergy = inputEnergy - 7.5;
+            avoEnergy = inputEnergy - 7.5; // TA - Use DefaultEnergy from GHG Table instead of hardcoding. 
             avoEnergy = Math.max(avoEnergy, 0);
 
 
@@ -409,7 +409,7 @@ exports.DeviceParameterInfo = async (req, res) => {
 
 
             // Avoided Energy Today
-            avoEnergy = inputEnergy - 7.5;
+            avoEnergy = inputEnergy - 7.5; // TA - This has to be based on default energy and changes per device. 
             avoEnergy = Math.max(avoEnergy, 0);
 
 
