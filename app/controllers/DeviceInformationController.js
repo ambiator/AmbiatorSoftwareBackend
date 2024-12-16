@@ -151,7 +151,7 @@ exports.DeviceParameterInfo = async (req, res) => {
 
 
             // Avoided Energy Today
-            avoEnergy = inputEnergy - 7.5; // TA - Use DefaultEnergy from GHG Table instead of hardcoding. 
+            avoEnergy = inputEnergy - 7.5; // TA Take from table energy_ghg_calculation.defaultEnergyUse filtered by startdate (last) and deviceType
             avoEnergy = Math.max(avoEnergy, 0);
 
 
@@ -226,7 +226,7 @@ exports.DeviceParameterInfo = async (req, res) => {
 
 
             //Untill  Avoided Energy Today
-            untillAvoEnergy = untillInputEnergy - 7.5;
+            untillAvoEnergy = untillInputEnergy - 7.5; // TA Take from table energy_ghg_calculation.defaultEnergyUse filtered by startdate (last) and deviceType
             untillAvoEnergy = Math.max(untillAvoEnergy, 0);
 
 
@@ -409,7 +409,7 @@ exports.DeviceParameterInfo = async (req, res) => {
 
 
             // Avoided Energy Today
-            avoEnergy = inputEnergy - 7.5; // TA - This has to be based on default energy and changes per device. 
+            avoEnergy = inputEnergy - 7.5; // TA Take from table energy_ghg_calculation.defaultEnergyUse filtered by startdate (last) and deviceType
             avoEnergy = Math.max(avoEnergy, 0);
 
 
@@ -489,7 +489,7 @@ exports.DeviceParameterInfo = async (req, res) => {
 
 
             // Until Avoided Energy 
-            untillAvoEnergy = (untillInputEnergy - 7.5) / 1000;
+            untillAvoEnergy = (untillInputEnergy - 7.5) / 1000; // TA Take from table energy_ghg_calculation.defaultEnergyUse filtered by startdate (last) and deviceType
             untillAvoEnergy = Math.max(untillAvoEnergy, 0);
 
 
@@ -1889,12 +1889,12 @@ exports.custDeviceInfo = async (req, res) => {
 
         // Calculate energy and avoided emissions
         const inputEnergy = todayEnergyRows[0]?.AverageTKW || 0;
-        const avoEnergy = Math.max(inputEnergy - 7.5, 0);
-        const todayGhG = todayGhGRows[0]?.GHGe || 0;
+        const avoEnergy = Math.max(inputEnergy - 7.5, 0); // TA Take from table energy_ghg_calculation.defaultEnergyUse filtered by startdate (last) and deviceType
+        const todayGhG = todayGhGRows[0]?.GHGe || 0; 
         const ghgeEnergy = avoEnergy * todayGhG;
 
         const untillInputEnergy = untilEnergyRows[0]?.AverageTKW || 0;
-        const untillAvoEnergy = Math.max(untillInputEnergy - 7.5, 0) / 1000;
+        const untillAvoEnergy = Math.max(untillInputEnergy - 7.5, 0) / 1000; // TA Take from table energy_ghg_calculation.defaultEnergyUse filtered by startdate (last) and deviceType
         const untilGhG = untilGhGRows[0]?.GHGe || 0;
         const untillGhgeEnergy = untillAvoEnergy * untilGhG;
 
