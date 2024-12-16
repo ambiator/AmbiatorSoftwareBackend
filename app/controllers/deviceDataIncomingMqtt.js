@@ -1,6 +1,8 @@
 const { connection, CustomError } = require('../config/dbSql2');
 const mqtt = require('mqtt');
 const mqttConfig = require('../config/mqttConfig.js');
+const moment = require('moment-timezone');
+
 
 
 const moment = require('moment-timezone');
@@ -118,7 +120,8 @@ async function handleTemperatureMessage(topic, payload) {
         const supply = tmpMessage.SL;
         const setPoint = tmpMessage.SP;
 
-        const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
+        const kolkataTimezone = 'Asia/Kolkata';
+        const dateTime = moment().tz(kolkataTimezone).format('YYYY-MM-DD HH:mm:ss');
         const currentHour = moment().format('hA');
         const minutes = moment().format('mm');
 
@@ -170,7 +173,7 @@ async function handleTemperatureMessage(topic, payload) {
     }
 }
 
-
+/*
 async function handleEnergyMessage(topic, payload) {
     const deviceId = topic.slice(0, -1);
     // console.log("deviceId deviceId" + deviceId);
@@ -194,13 +197,13 @@ async function handleEnergyMessage(topic, payload) {
 
         // const PowerFactor = fRows[0].defaultEnergyUse;
 
-        const Amps = energyMessage.TKW;
-        const Voltage = 230; // Assuming voltage is constant at 230V
-        const PowerFactor = 0.95; // Assuming power factor is constant at 0.92
+        // const Amps = energyMessage.TKW;
+        // const Voltage = 230; // Assuming voltage is constant at 230V
+        // const PowerFactor = 0.95; // Assuming power factor is constant at 0.92
 
         // Calculate energy consumption in kWh
-        const getkWh = (Amps * Voltage * PowerFactor) / 1000;
-        const kWh = getkWh.toFixed(2);
+        //c onst getkWh = (Amps * Voltage * PowerFactor) / 1000;
+        // const kWh = getkWh.toFixed(2);
 
 
         const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -247,7 +250,7 @@ async function handleEnergyMessage(topic, payload) {
     } catch (error) {
         console.error('Error processing device data message:', error);
     }
-}
+} */
 
 /*
 async function handleRpmBasedEnergyMessage(deviceId) {
@@ -375,8 +378,9 @@ async function handleRpmBasedEnergyMessage(deviceId) {
 
 async function handleRpmBasedEnergyMessage(deviceId) {
     try {
-        const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-        const currentHour = moment().format('hA');
+        const kolkataTimezone = 'Asia/Kolkata';
+        const dateTime = moment().tz(kolkataTimezone).format('YYYY-MM-DD HH:mm:ss');
+        const currentHour = moment().tz(kolkataTimezone).format('hA');
         const roundedMinutes = Math.ceil(moment().minute() / 10) * 10;
 
         // Helper function for query execution
@@ -498,9 +502,9 @@ async function handleWaterUsedDataMessage(topic, payload) {
 
         const TWU = energyMessage.TWU;
 
-        const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-
-        const currentHour = moment().format('hA');
+        const kolkataTimezone = 'Asia/Kolkata';
+        const dateTime = moment().tz(kolkataTimezone).format('YYYY-MM-DD HH:mm:ss');
+        const currentHour = moment().tz(kolkataTimezone).format('hA');
         const minutes = moment().format('mm');
 
         const roundedMinutes = Math.ceil(parseInt(minutes) / 10) * 10; // Round to the nearest ten
