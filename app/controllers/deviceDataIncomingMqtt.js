@@ -3,9 +3,6 @@ const mqtt = require('mqtt');
 const mqttConfig = require('../config/mqttConfig.js');
 const moment = require('moment-timezone');
 
-
-
-const moment = require('moment-timezone');
 const { fanRangeSet } = require('../utility/utilityFunction.js');
 
 
