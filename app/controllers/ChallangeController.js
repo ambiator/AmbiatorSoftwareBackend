@@ -138,12 +138,12 @@ exports.showData2 = async (req, res) => {
 
         // Define alert messages
         const alertMessages = {
-            fan: 'Alert in Fan',
-            water: 'Alert in Water Flow',
-            waterSupply: 'Alert in Water Supply',
-            filterPresent: 'Alert in Filter Present',
-            filterClean: 'Alert in Filter Clean',
-            comm: 'Alert in Comm'
+            fan: 'Fan did not turn on',
+            water: 'There is no Water flowing through the pump',
+            waterSupply: 'Main water supply has stopped or tap is shut',
+            filterPresent: 'Filter has been removed, Please place it back',
+            filterClean: 'Filter needs a cleaning or replacement',
+            comm: 'Unable to connect to Ambiator via WiFi or 4G'
         };
 
         // Process rows to create alert objects
